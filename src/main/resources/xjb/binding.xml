@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" version="2.0"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+	
+	<jaxb:globalBindings>
+		<xjc:javaType name="java.time.LocalDateTime" xmlType="xs:dateTime"
+			adapter="uk.co.surething.ph.models.adapters.LocalDateTimeAdapter" />
+		<xjc:javaType name="java.time.LocalTime" xmlType="xs:time"
+			adapter="uk.co.surething.ph.models.adapters.LocalTimeAdapter" />
+		<xjc:javaType name="java.time.LocalDate" xmlType="xs:date"
+			adapter="uk.co.surething.ph.models.adapters.LocalDateAdapter" />
+	</jaxb:globalBindings>
+
+    
+</bindings>
