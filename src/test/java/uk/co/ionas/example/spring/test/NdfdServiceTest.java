@@ -1,4 +1,4 @@
-package uk.co.ionas.example.spring;
+package uk.co.ionas.example.spring.test;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

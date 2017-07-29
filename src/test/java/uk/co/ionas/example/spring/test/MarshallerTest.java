@@ -1,4 +1,4 @@
-package uk.co.ionas.example.spring;
+package uk.co.ionas.example.spring.test;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
