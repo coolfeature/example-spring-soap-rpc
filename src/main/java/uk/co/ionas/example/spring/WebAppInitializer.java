@@ -27,7 +27,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 	@Bean
 	public PropertyPlaceholderConfigurer properties() {
 		PropertyPlaceholderConfigurer props = new PropertyPlaceholderConfigurer();
-		String dbProperties = "db/h2.properties";
+		String dbProperties = "db/hsql.properties";
 		props.setLocations(
 			new ClassPathResource(dbProperties)
 		);

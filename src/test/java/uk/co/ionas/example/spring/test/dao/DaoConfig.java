@@ -2,7 +2,7 @@ package uk.co.ionas.example.spring.test.dao;
 
 import javax.sql.DataSource;
 
-import org.h2.jdbcx.JdbcDataSource;
+import org.hsqldb.jdbc.JDBCDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,34 +14,39 @@ import uk.co.ionas.example.spring.Constants;
 @Configuration
 public class DaoConfig {
 
-	@Value("${jdbc.h2.url}")
-    private String h2Url;
+	@Value("${jdbc.hsql.url}")
+    private String dbUrl;
+	
+	@Value("${jdbc.hsql.username}")
+    private String dbUsername;
+	
+	@Value("${jdbc.hsql.password}")
+    private String dbPassword;
 	
 	public static final String[] TBL_SCRIPTS = new String[] {
 		"db/sql/tables/APP_CONSTANTS.sql"
+		, "db/sql/queries/upsert.sql"
+		, "db/sql/queries/select.sql"
 	};
 		
 	public static final String[] TR_SCRIPTS = new String[] {
 	};
 	
-	public static final String[] TR_SCRIPTS_H2 = new String[] {
-	};
 	
 	@Bean
 	public DataSource h2ds() {
 		DataSource ds = null;
-		ds = h2();
+		ds = db();
 		DatabasePopulatorUtils.execute(uk.co.ionas.example.spring.dao.DaoConfig.createPopulator(TBL_SCRIPTS, ";"), ds);
-		DatabasePopulatorUtils.execute(uk.co.ionas.example.spring.dao.DaoConfig.createPopulator(TR_SCRIPTS_H2, ";"), ds);
 		return ds;
 	}
 	
 	
-	private DataSource h2() { 
-		JdbcDataSource ds = new JdbcDataSource();
-		ds.setUser("sa");
-		ds.setPassword("sa");
-		ds.setUrl(h2Url);
+	private DataSource db() { 
+		JDBCDataSource ds = new JDBCDataSource();
+		ds.setDatabase(dbUrl);
+		ds.setUser(dbUsername);
+		ds.setPassword(dbPassword);
 		return ds;
 	}
 }
