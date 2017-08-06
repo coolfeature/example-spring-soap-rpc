@@ -1,5 +1,6 @@
 .classpath
 .project
 .settings
+src/main/resources/db/sybase.properties
 src/test/resources/db/hsql
 target

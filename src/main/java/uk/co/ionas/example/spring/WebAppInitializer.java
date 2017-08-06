@@ -10,6 +10,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -25,9 +26,10 @@ public class WebAppInitializer implements WebApplicationInitializer {
 	private static final Logger LOGGER = LogManager.getLogger();
 	
 	@Bean
+	@Profile("!" + Constants.TEST)
 	public PropertyPlaceholderConfigurer properties() {
 		PropertyPlaceholderConfigurer props = new PropertyPlaceholderConfigurer();
-		String dbProperties = "db/hsql.properties";
+		String dbProperties = "db/sybase.properties";
 		props.setLocations(
 			new ClassPathResource(dbProperties)
 		);
@@ -41,8 +43,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
 		LOGGER.info("Registering DispatcherServlet");
 		DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
-		final ServletRegistration.Dynamic dispatcher = servletContext
-				.addServlet("dispatcherServlet", dispatcherServlet);
+		final ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcherServlet", dispatcherServlet);
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping(Constants.API_API, Constants.API_ROOT);
 
